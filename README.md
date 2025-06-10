@@ -2,9 +2,9 @@ Users can rate movies, apply filters based on preferences, and receive personali
 
 ![Screenshot From 2025-06-10 23-46-58](https://github.com/user-attachments/assets/2da9eecc-02bb-47e8-b9cb-c5e7b3fd50a1)
 
-![Screenshot From 2025-06-10 23-48-23](https://github.com/user-attachments/assets/bed19fc1-a2ed-4fd6-abb6-fec2b325188c)
-
 ![Screenshot From 2025-06-10 23-48-02](https://github.com/user-attachments/assets/a868fcfc-9db2-4a60-b69d-5f5f0e9fab5a)
+
+![Screenshot From 2025-06-10 23-48-23](https://github.com/user-attachments/assets/bed19fc1-a2ed-4fd6-abb6-fec2b325188c)
 
 ## Features
 - Get movie suggestions based on your ratings
