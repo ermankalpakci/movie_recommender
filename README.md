@@ -6,7 +6,7 @@ Users can rate movies, apply filters based on preferences, and receive personali
 
 ![Screenshot From 2025-06-10 23-48-23](https://github.com/user-attachments/assets/bed19fc1-a2ed-4fd6-abb6-fec2b325188c)
 
-## Features
+### Features
 - Get movie suggestions based on your ratings
 - Filter by genres, directors, release year, and runtime
 - Rate movies with a simple 1-10 scale
@@ -14,6 +14,11 @@ Users can rate movies, apply filters based on preferences, and receive personali
 ### Prerequisites
 - Java JDK 8 or higher
 - Maven
+
+### Tech
+- Java 8+, Spark Java Framework
+- Google Gson for JSON processing
+- Movie and Rating Databases (CSV-based)
 
 ### Installation
 ```bash
