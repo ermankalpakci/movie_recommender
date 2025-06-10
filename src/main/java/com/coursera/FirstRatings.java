@@ -29,49 +29,6 @@ public class FirstRatings {
         return movies;
     }
 
-    // void testLoadMovies(){
-    //     String filePath = "src/data/ratedmoviesfull.csv";
-    //     ArrayList<Movie> movies = loadMovies(filePath);
-    //     System.out.println("This many movies: " + movies.size());
-
-    //     int comedyCount = 0;
-    //     int longMovies = 0;
-    //     for (Movie m : movies) {
-    //         String[] genres = m.getGenres().split(",");
-    //         for (String g : genres) {
-    //             if (g.trim().equalsIgnoreCase("Comedy")) {
-    //                 comedyCount++;
-    //                 break;
-    //             }
-    //         }
-    //         if (m.getMinutes() > 150) {
-    //             longMovies++;
-    //         }
-    //     }
-
-    //     HashMap<String, Integer> directorCounts = new HashMap<>();
-    //     for (Movie m : movies) {
-    //         String[] directors = m.getDirector().split(",");
-    //         for (String d : directors) {
-    //             String director = d.trim();
-    //             directorCounts.put(director, directorCounts.getOrDefault(director, 0) + 1);
-    //         }
-    //     }
-
-    //     int maxMovies = 0;
-    //     for (int count : directorCounts.values()) {
-    //         if (count > maxMovies) {
-    //             maxMovies = count;
-    //         }
-    //     }
-
-    //     List<String> maxDirectors = new ArrayList<>();
-    //     for (String director : directorCounts.keySet()) {
-    //         if (directorCounts.get(director) == maxMovies) {
-    //             maxDirectors.add(director);
-    //         }
-    //     }
-    // }
 
     public ArrayList<EfficientRater> loadRaters(String filename){
         ArrayList<EfficientRater> raters = new ArrayList<>();
@@ -114,22 +71,6 @@ public class FirstRatings {
             }
         }
 
-        // int countMaxRaters = 0;
-        // for (EfficientRater r : raters) {
-        //     if (r.numRatings() == maxRatings) {
-        //         countMaxRaters++;
-        //         System.out.println(r.getID());
-        //     }
-        // }
-
-
-        // String targetMovieId = "1798709";
-        // int ratingCount = 0;
-        // for (EfficientRater r : raters) {
-        //     if (r.hasRating(targetMovieId)) {
-        //         ratingCount++;
-        //     }
-        // }
 
         HashSet<String> uniqueMovies = new HashSet<>();
         for (EfficientRater r : raters) {

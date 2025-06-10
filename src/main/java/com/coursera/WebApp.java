@@ -3,7 +3,9 @@ package com.coursera;
 import java.util.*;
 import static spark.Spark.*;
 import com.google.gson.Gson;
-
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 
@@ -13,17 +15,19 @@ public class WebApp {
         MovieDatabase.initialize("data/ratedmoviesfull.csv");
         RaterDatabase.initialize("data/ratings.csv");
         
-        // Configure static files
         staticFiles.externalLocation(System.getProperty("user.dir") + "/src/main/resources/public");
         staticFiles.location("/public");
-        
-        // Root route to serve index.html
+        // Add this before your routes
+        before((req, res) -> {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Methods", "GET,POST");
+            res.header("Access-Control-Allow-Headers", "Content-Type");
+        });
         get("/", (req, res) -> {
             res.redirect("/index.html");
             return null;
         });
         
-        // Endpoint to get movies to rate
         get("/get-movies", (req, res) -> {
             res.type("application/json");
             RecommendationRunner runner = new RecommendationRunner();
@@ -31,7 +35,6 @@ public class WebApp {
             return new Gson().toJson(movies);
         });
 
-        // Endpoint to get movie details
         get("/movie-info", (req, res) -> {
             res.type("application/json");
             String movieId = req.queryParams("id");
@@ -48,23 +51,50 @@ public class WebApp {
         });
         post("/recommend", (req, res) -> {
             res.type("application/json");
+            JsonObject json = JsonParser.parseString(req.body()).getAsJsonObject();
+
+            Map<String, Double> ratings = new Gson().fromJson(json.getAsJsonObject("ratings"),
+            new TypeToken<Map<String, Double>>(){}.getType());
+
             String userId = "web_user_" + System.currentTimeMillis();
             
-            // Parse ratings from JSON
-            Map<String, Double> ratings = new Gson().fromJson(req.body(), new TypeToken<Map<String, Double>>(){}.getType());
-            
-            // Create and add new rater
+            boolean filterFlag = false;
             EfficientRater newRater = new EfficientRater(userId);
             for (Map.Entry<String, Double> entry : ratings.entrySet()) {
                 newRater.addRating(entry.getKey(), entry.getValue());
             }
             RaterDatabase.addRater(newRater);
+            JsonObject filters = json.has("filters") ? json.getAsJsonObject("filters") : new JsonObject();
+            AllFilters filter = new AllFilters();
             
-            // Generate recommendations
+            if (filters.has("genres")) {
+                for (JsonElement g : filters.getAsJsonArray("genres")) {
+                    filter.addFilter(new GenreFilter(g.getAsString()));
+                    filterFlag = true;
+                }
+            }
+
+            if (filters.has("year")) {
+                filter.addFilter(new YearAfterFilter(filters.get("year").getAsInt()));
+                filterFlag = true;
+            }
+
+            if (filters.has("minMinutes") && filters.has("maxMinutes")) {
+                filter.addFilter(new MinutesFilter(
+                    filters.get("minMinutes").getAsInt(), 
+                    filters.get("maxMinutes").getAsInt()
+                ));
+                filterFlag = true;
+            }
+
+            if (filters.has("directors")) {
+                String directorsString = filters.get("directors").getAsString();
+                filter.addFilter(new DirectorsFilter(directorsString));
+                filterFlag = true;
+            }
             RecommendationRunner runner = new RecommendationRunner();
-            ArrayList<Rating> recommendations = runner.getRecommendations(userId);
+            ArrayList<Rating> recommendations = runner.getRecommendations(userId, filter, filterFlag);
             
-            // Prepare response
             List<Map<String, Object>> results = new ArrayList<>();
             for (Rating rating : recommendations) {
                 String movieId = rating.getItem();
@@ -75,7 +105,6 @@ public class WebApp {
                 movieData.put("genre", MovieDatabase.getGenres(movieId));
                 results.add(movieData);
             }
-            
             return new Gson().toJson(results);
         });
    }

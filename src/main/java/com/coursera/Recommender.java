@@ -7,8 +7,6 @@ public interface Recommender {
 
     public ArrayList<String> getItemsToRate ();
 
-    /**
-     * @param webRaterID 
-     */
+
     public void printRecommendationsFor (String webRaterID);
 }

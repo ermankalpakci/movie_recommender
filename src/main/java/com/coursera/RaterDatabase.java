@@ -1,7 +1,5 @@
 package com.coursera;
 
-
-
 import edu.duke.*;
 import java.util.*;
 import org.apache.commons.csv.*;
@@ -68,7 +66,5 @@ public class RaterDatabase {
     public static int size() {
 	    return ourRaters.size();
     }
-    
-    
         
 }

@@ -94,6 +94,7 @@ public class FourthRatings {
         }
         return 0.0;
     }
+    
 
     public ArrayList<Rating> getAverageRatings(int minimalRaters) {
         ArrayList<String> movies = MovieDatabase.filterBy(new TrueFilter());

@@ -63,7 +63,6 @@ public class Movie {
         return minutes;
     }
 
-    // Returns a string of the item's information
     public String toString () {
         String result = "Movie [id=" + id + ", title=" + title + ", year=" + year;
         result += ", genres= " + genres + "]";

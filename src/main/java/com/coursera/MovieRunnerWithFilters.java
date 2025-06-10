@@ -100,10 +100,6 @@ public class MovieRunnerWithFilters {
         Collections.sort(avgRatings);
 
         System.out.println("Found " + avgRatings.size() + " movies");
-        // for (Rating rating : avgRatings) {
-        //     String id = rating.getItem();
-        //     System.out.println(rating.getValue() + " " + MovieDatabase.getYear(id) + " " + MovieDatabase.getTitle(id));
-        //     System.out.println("    " + MovieDatabase.getGenres(id));
-        // }
+
     }
 }

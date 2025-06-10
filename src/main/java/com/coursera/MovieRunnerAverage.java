@@ -1,11 +1,6 @@
 package com.coursera;
 
-/**
- * Write a description of SecondRatings here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 
 import java.util.*;
 
@@ -31,7 +26,5 @@ public class MovieRunnerAverage {
             System.out.println("Movie not found.");
             return;
         }
-        // int minimalRaters = 0;
-        // double avg = secondRatings.getAverageByID(movieId, minimalRaters);
     }
 }

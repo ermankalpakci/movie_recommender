@@ -1,11 +1,5 @@
 package com.coursera;
 
-/**
- * Write a description of class Rater here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 
 import java.util.*;
 

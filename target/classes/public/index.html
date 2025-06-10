@@ -7,44 +7,68 @@
 <body>
     <div class="container">
         <h1>Movie Recommender</h1>
-        <div id="loading">Loading movies to rate...</div>
         <div id="filter-controls">
             <h3>Filter Options (Optional)</h3>
+
+
+            <div class="filter-group-genres">
+                <label for="toggle-genre"><strong>Select Genres:</strong></label>
+            </div>
             
-            <div class="filter-group">
-                <input type="checkbox" id="toggle-genres">
-                <label for="toggle-genres"><strong>Genres:</strong></label>
-                <select id="genres" multiple disabled>
-                    <option value="Action">Action</option>
-                    <option value="Comedy">Comedy</option>
-                    <option value="Drama">Drama</option>
-                    <option value="Sci-Fi">Sci-Fi</option>
-                </select>
+            <div class="genre-selection-container">
+                
+                <div class="genre-search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="genre-search" placeholder="Search genres...">
+                </div>
+                
+                <div class="genre-container" id="genre-container">
+                    <!-- Genre will be populated here -->
+                </div>
+                
+                <h3 class="section-title"><i class="fas fa-check-circle"></i> Selected Genres</h3>
+                <div class="selected-genres" id="selected-genres">
+                    <div class="empty-tags">No genres selected yet</div>
+                </div>
             </div>
 
+
             <div class="filter-group">
-                <input type="checkbox" id="toggle-year">
                 <label for="toggle-year"><strong>Release Year:</strong></label>
-                <input type="number" id="min-year" placeholder="From year" min="1900" disabled>
-                <input type="number" id="max-year" placeholder="To year" min="1900" disabled>
-            </div>
-
-            <!-- <div class="filter-group">
-                <input type="checkbox" id="toggle-runtime">
-                <label for="toggle-runtime"><strong>Runtime (minutes):</strong></label>
-                <input type="number" id="min-minutes" placeholder="Min" disabled>
-                <input type="number" id="max-minutes" placeholder="Max" disabled>
-            </div>
+                <input type="number" id="min-year" placeholder="From year" min="1900">
+            </div> 
 
             <div class="filter-group">
-                <input type="checkbox" id="toggle-directors">
-                <label for="toggle-directors"><strong>Directors (comma separated):</strong></label>
-                <input type="text" id="directors" placeholder="e.g., Christopher Nolan, Greta Gerwig" disabled>
-            </div> -->
+                <label for="toggle-runtime"><strong>Runtime (minutes):</strong></label>
+                <input type="number" id="min-minutes" placeholder="Min">
+                <input type="number" id="max-minutes" placeholder="Max">
+            </div>
+
+            <div class="filter-group-director">
+                <label for="toggle-director"><strong>Select Directors:</strong></label>
+            </div>
+            
+            <div class="director-selection-container">
+                
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="director-search" placeholder="Search directors...">
+                </div>
+                
+                <div class="directors-container" id="directors-container">
+                    <!-- Director options will be populated here -->
+                </div>
+                
+                <h3 class="section-title"><i class="fas fa-check-circle"></i> Selected Directors</h3>
+                <div class="selected-directors" id="selected-directors">
+                    <div class="empty-tags">No directors selected yet</div>
+                </div>
+            </div>
+            
         </div>
 
         <div id="movie-list"></div>
-        <button id="submit-btn" disabled>Get Recommendations</button>
+            <button id="submit-btn" disabled>Get Recommendations</button>
         <div id="recommendations"></div>
 
     </div>
